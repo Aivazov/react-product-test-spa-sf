@@ -3,9 +3,12 @@ import { HiSearch } from 'react-icons/hi';
 
 export default function Searchbox() {
   return (
-    <div className="flex justify-center items-center relative mb-4 uppercase">
+    <div className="flex justify-center items-center relative mb-4 uppercase mx-6">
       <HiSearch className="w-5 h-5 absolute right-[6px] top-[26px]" />
-      <input type="text" className="px-2 mt-5 pb-2 rounded-[4px] border border-black" />
+      <input
+        type="text"
+        className="min-w-[300px] px-2 mt-5 pb-2 rounded-[4px] border border-black"
+      />
     </div>
   );
 }

@@ -6,8 +6,8 @@ import Searchbox from './Searchbox';
 
 export default function Header() {
   return (
-    <div>
-      <header className='flex items-center justify-center'>
+    <div className="max-w-[960px] mx-auto my-0 px-4 py-0">
+      <header className="flex items-center justify-between gap-3 py-2 mb-4 border-b border-black">
         <p>
           <span role="img" aria-label="computer icon">
             💻
@@ -16,8 +16,10 @@ export default function Header() {
         </p>
         <nav className="flex flex-row justify-center items-center">
           <Searchbox />
-          <Link to="/products" className=''>Add Product</Link>
         </nav>
+        <Link to="/products" className="">
+          Add Product
+        </Link>
       </header>
       <Suspense fallback={<div>Loading page...</div>}>
         <Outlet />
