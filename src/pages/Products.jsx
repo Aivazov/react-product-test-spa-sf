@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import NoImage from '../assets/images/no-image.png';
+// import NoImage from '../assets/images/no-image.png';
 // import { getProducts } from '../API';
 import axios from 'axios';
 import ProductsElement from '../components/ProductsElement';
@@ -17,14 +17,16 @@ export default function Products() {
       return res;
     });
   };
+
+  const removeItem = () => {};
+
+  fetchProducts();
   console.log('products', products);
   return (
     <div className="container">
       <div className="row justify-content-center">
         <div className="col-md-6 text-center mb-5">
-          <h2 className="text-start" onClick={fetchProducts}>
-            Products
-          </h2>
+          <h2 className="text-start">Products</h2>
         </div>
       </div>
       <div className="row">
@@ -32,7 +34,8 @@ export default function Products() {
           <div className="table-wrap">
             <table className="flex flex-col">
               <thead>
-                <tr className='flex items-center justify-between'>
+                {/* <tr className="grid grid-cols-9"> */}
+                <tr className="flex items-center justify-between">
                   <th className="">ID</th>
                   <th className="">Photo</th>
                   <th className="">Name</th>

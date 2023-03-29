@@ -12,12 +12,14 @@ export default function HeaderLayout() {
           <span role="img" aria-label="computer icon">
             💻
           </span>{' '}
-          Products Store
+          <Link to="/" className="">
+            Products Store
+          </Link>
         </p>
         <nav className="flex flex-row justify-center items-center">
           <Searchbox />
         </nav>
-        <Link to="/" className="">
+        <Link to="/add-product" className="">
           Add Product
         </Link>
       </header>
