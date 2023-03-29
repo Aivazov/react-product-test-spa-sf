@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // import NoImage from '../assets/images/no-image.png';
 // import { getProducts } from '../API';
 import axios from 'axios';
@@ -12,15 +12,18 @@ export default function Products() {
   const fetchProducts = () => {
     return axios.get(URL).then((res) => {
       console.log('res.data.products', res.data.products);
-      // console.log('res', res);
       setProducts(res.data.products);
       return res;
     });
   };
 
-  const removeItem = () => {};
+  // const removeItem = () => {};
 
-  fetchProducts();
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  // fetchProducts();
   console.log('products', products);
   return (
     <div className="container">
