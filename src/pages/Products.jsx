@@ -51,7 +51,7 @@ export default function Products() {
                 </tr>
               </thead>
               <tbody>
-                {products ? (
+                {products.length > 0 ? (
                   products.map((product) => (
                     <ProductsElement key={product.id} data={product} />
                   ))
