@@ -12,12 +12,12 @@ export default function Header() {
           <span role="img" aria-label="computer icon">
             💻
           </span>{' '}
-          Merch Store
+          Products Store
         </p>
         <nav className="flex flex-row justify-center items-center">
           <Searchbox />
         </nav>
-        <Link to="/products" className="">
+        <Link to="/" className="">
           Add Product
         </Link>
       </header>
