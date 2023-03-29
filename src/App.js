@@ -1,13 +1,16 @@
 import { Route, Routes } from 'react-router-dom';
 // import { lazy } from 'react';
-import Header from './components/Header';
+import HeaderLayout from './components/HeaderLayout';
 
 import './App.css';
+import Products from './pages/Products';
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Header />}></Route>
+      <Route path="/" element={<HeaderLayout />}>
+        <Route path="/" element={<Products />}></Route>
+      </Route>
     </Routes>
   );
 }
