@@ -5,7 +5,10 @@ import { GrClose } from 'react-icons/gr';
 export default function ProductsElement({ data }) {
   return (
     // <tr className="grid grid-cols-9" role="alert">
-    <tr className="flex items-center justify-between bg-gray-400 mb-2" role="alert">
+    <tr
+      className="flex items-center justify-between h-10 bg-gray-400 rounded-2xl px-3 overflow-hidden mb-2"
+      role="alert"
+    >
       <td>
         <label className="product-id">
           <span className="checkmark">{data.id}</span>
@@ -20,8 +23,8 @@ export default function ProductsElement({ data }) {
           )}
         </div>
       </td>
-      <td className="name">
-        <span>{data.title}</span>
+      <td className="max-w-[120px]">
+        <span className="">{data.title}</span>
       </td>
       <td className="description max-w-[200px]">
         {/* <td className="description max-w-[200px] overflow-y-scroll overflow-x-hidden"> */}

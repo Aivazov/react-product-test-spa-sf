@@ -3,16 +3,20 @@ import React, { useState, useEffect } from 'react';
 // import { getProducts } from '../API';
 import axios from 'axios';
 import ProductsElement from '../components/ProductsElement';
+import ProductsSkeleton from '../components/ProductsSkeleton';
 
 const URL = 'https://dummyjson.com/products?limit=10';
 
 export default function Products() {
   const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchProducts = () => {
+    setIsLoading(true);
     return axios.get(URL).then((res) => {
       console.log('res.data.products', res.data.products);
       setProducts(res.data.products);
+      setIsLoading(false);
       return res;
     });
   };
@@ -51,9 +55,14 @@ export default function Products() {
                 </tr>
               </thead>
               <tbody>
+                {isLoading &&
+                  products.map((product) => (
+                    <ProductsSkeleton key={product.id} data={product} />
+                  ))}
+
                 {products.length > 0 ? (
                   products.map((product) => (
-                    <ProductsElement key={product.id} data={product} />
+                    <ProductsSkeleton key={product.id} data={product} />
                   ))
                 ) : (
                   <div>Found no products yet</div>
