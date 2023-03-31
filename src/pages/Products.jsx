@@ -33,7 +33,7 @@ export default function Products() {
     <div className="container">
       <div className="row justify-content-center">
         <div className="col-md-6 text-center mb-5">
-          <h2 className="text-start">Products</h2>
+          <h2 className="text-start hidden">Products</h2>
         </div>
       </div>
       <div className="row">
@@ -44,14 +44,14 @@ export default function Products() {
                 {/* <tr className="grid grid-cols-9"> */}
                 <tr className="flex items-center justify-between">
                   <th className="">ID</th>
-                  <th className="">Photo</th>
+                  <th className="w-[60px]">Photo</th>
                   <th className="">Name</th>
-                  <th className=" max-w-[200px]">Description</th>
+                  <th className="w-[330px]">Description</th>
                   <th className="">Price</th>
                   <th className="">Rating</th>
                   <th className="">Stock</th>
-                  <th>Category</th>
-                  <th></th>
+                  <th className='w-[50px]'>Category</th>
+                  <th className='w-7'> </th>
                 </tr>
               </thead>
               <tbody>

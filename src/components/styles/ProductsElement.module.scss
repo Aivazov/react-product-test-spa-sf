@@ -1,0 +1,28 @@
+.root {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+  background-color: rgb(156 163 175);
+  border-radius: 16px;
+  padding: 12px 0 12px 0;
+  overflow: hidden;
+  margin-top: 12px;
+  margin-bottom: 8px;
+
+  .images {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    background-color: transparent;
+    width: 50px;
+  }
+
+  .title {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    background-color: transparent;
+    width: 50px;
+  }
+}

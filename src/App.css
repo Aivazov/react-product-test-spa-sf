@@ -1,4 +1,7 @@
-.App {
+/* @use 'styles/_colors.scss'; // assuming a styles directory under src/
+@use '~nprogress/nprogress'; */
+
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +38,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */

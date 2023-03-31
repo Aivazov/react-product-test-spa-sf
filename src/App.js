@@ -5,6 +5,7 @@ import HeaderLayout from './components/HeaderLayout';
 import './App.css';
 import Products from './pages/Products';
 import AddProductForm from './pages/AddProductForm';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Route path="/" element={<HeaderLayout />}>
         <Route path="/" element={<Products />}></Route>
         <Route path="add-product" element={<AddProductForm />}></Route>
+        <Route path="*" element={<NotFound />}></Route>
       </Route>
     </Routes>
   );
