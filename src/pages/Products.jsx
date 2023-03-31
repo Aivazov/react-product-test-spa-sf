@@ -56,15 +56,15 @@ export default function Products() {
               </thead>
               <tbody>
                 {isLoading &&
+                  [...new Array(10)].map(() => <ProductsSkeleton />)}
+
+                {!isLoading &&
+                  products.length > 0 &&
                   products.map((product) => (
-                    <ProductsSkeleton key={product.id} data={product} />
+                    <ProductsElement key={product.id} data={product} />
                   ))}
 
-                {products.length > 0 ? (
-                  products.map((product) => (
-                    <ProductsSkeleton key={product.id} data={product} />
-                  ))
-                ) : (
+                {!isLoading && products.length < 1 && (
                   <div>Found no products yet</div>
                 )}
               </tbody>
