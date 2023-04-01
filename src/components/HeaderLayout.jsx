@@ -11,7 +11,7 @@ export default function HeaderLayout() {
         <p>
           <span role="img" aria-label="computer icon">
             💻
-          </span>{' '}
+          </span>
           <Link to="/" className="">
             Products Store
           </Link>

@@ -30,7 +30,7 @@ export default function AddProductForm() {
               <input
                 type="date"
                 placeholder="Date"
-                className="border border-black rounded-lg py-2 px-4 text-start mr-4"
+                className="border border-black rounded-lg py-2 px-4 w-[215px] text-start mr-4"
               />
             </label>
             <label>

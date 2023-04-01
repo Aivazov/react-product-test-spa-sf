@@ -9,7 +9,9 @@ const URL = 'https://dummyjson.com/products?limit=10';
 
 export default function Products() {
   const [products, setProducts] = useState([]);
+  const [sorted, setSorted] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [toggle, setToggle] = useState(false);
 
   const fetchProducts = () => {
     setIsLoading(true);
@@ -27,6 +29,125 @@ export default function Products() {
     fetchProducts();
   }, []);
 
+  const sortById = () => {
+    setToggle(!toggle);
+    setSorted(products);
+    if (toggle === false) {
+      const sortDescendingOrder = [...products].sort(
+        (firstId, secondId) => secondId.id - firstId.id
+      );
+      console.log('done');
+      setProducts(sortDescendingOrder);
+    } else {
+      setProducts(sorted);
+      console.log('denied');
+    }
+    // const sortDescendingOrder = [...products].sort(
+    //   (firstId, secondId) => secondId.id - firstId.id
+    // );
+
+    // setProducts(sortDescendingOrder);
+    // return sortDescendingOrder;
+
+    // return products.sort((firstId, secondId) => secondId.id - firstId.id);
+    // console.log(sortDescendingOrder);
+  };
+
+  const sortByTitle = () => {
+    setToggle(!toggle);
+    setSorted(products);
+    if (toggle === false) {
+      const sortDescendingOrder = [...products].sort(
+        (firstTitle, secondTitle) =>
+          secondTitle.title.localeCompare(firstTitle.title)
+      );
+      console.log('done');
+      setProducts(sortDescendingOrder);
+    } else {
+      setProducts(sorted);
+      console.log('denied');
+    }
+  };
+
+  const sortByDescription = () => {
+    setToggle(!toggle);
+    setSorted(products);
+    if (toggle === false) {
+      const sortDescendingOrder = [...products].sort(
+        (firstDescription, secondDescription) =>
+          secondDescription.description.localeCompare(
+            firstDescription.description
+          )
+      );
+      console.log('done');
+      setProducts(sortDescendingOrder);
+    } else {
+      setProducts(sorted);
+      console.log('denied');
+    }
+  };
+
+  const sortByPrice = () => {
+    setToggle(!toggle);
+    setSorted(products);
+    if (!toggle) {
+      const sortDescendingOrder = [...products].sort(
+        (firstPrice, secondPrice) => secondPrice.price - firstPrice.price
+      );
+      console.log('done');
+      setProducts(sortDescendingOrder);
+    } else {
+      setProducts(sorted);
+      console.log('denied');
+    }
+  };
+
+  const sortByRating = () => {
+    setToggle(!toggle);
+    setSorted(products);
+    if (toggle === false) {
+      const sortDescendingOrder = [...products].sort(
+        (firstRating, secondRating) => secondRating.rating - firstRating.rating
+      );
+      console.log('done');
+      setProducts(sortDescendingOrder);
+    } else {
+      setProducts(sorted);
+      console.log('denied');
+    }
+  };
+
+  const sortByStock = () => {
+    setToggle(!toggle);
+    setSorted(products);
+    if (toggle === false) {
+      const sortDescendingOrder = [...products].sort(
+        (firstStock, secondStock) => secondStock.stock - firstStock.stock
+      );
+      console.log('done');
+      setProducts(sortDescendingOrder);
+    } else {
+      setProducts(sorted);
+      console.log('denied');
+    }
+  };
+
+  const sortByCategory = () => {
+    setToggle(!toggle);
+    setSorted(products);
+    if (toggle === false) {
+      const sortDescendingOrder = [...products].sort(
+        (firstCategory, secondCategory) =>
+          secondCategory.category.localeCompare(firstCategory.category)
+      );
+      console.log('done');
+      setProducts(sortDescendingOrder);
+    } else {
+      setProducts(sorted);
+      console.log('denied');
+    }
+  };
+
   // fetchProducts();
   console.log('products', products);
   return (
@@ -43,15 +164,35 @@ export default function Products() {
               <thead>
                 {/* <tr className="grid grid-cols-9"> */}
                 <tr className="flex items-center justify-between">
-                  <th className="">ID</th>
+                  <th className="cursor-pointer" onClick={sortById}>
+                    ID
+                  </th>
                   <th className="w-[60px]">Photo</th>
-                  <th className="">Name</th>
-                  <th className="w-[330px]">Description</th>
-                  <th className="">Price</th>
-                  <th className="">Rating</th>
-                  <th className="">Stock</th>
-                  <th className='w-[50px]'>Category</th>
-                  <th className='w-7'> </th>
+                  <th className="cursor-pointer" onClick={sortByTitle}>
+                    Title
+                  </th>
+                  <th
+                    className="w-[330px] cursor-pointer"
+                    onClick={sortByDescription}
+                  >
+                    Description
+                  </th>
+                  <th className="cursor-pointer" onClick={sortByPrice}>
+                    Price
+                  </th>
+                  <th className="cursor-pointer" onClick={sortByRating}>
+                    Rating
+                  </th>
+                  <th className="cursor-pointer" onClick={sortByStock}>
+                    Stock
+                  </th>
+                  <th
+                    className="w-[50px] cursor-pointer"
+                    onClick={sortByCategory}
+                  >
+                    Category
+                  </th>
+                  <th className="w-7"> </th>
                 </tr>
               </thead>
               <tbody>
