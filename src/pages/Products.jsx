@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ReactPaginate from 'react-paginate';
 // import NoImage from '../assets/images/no-image.png';
 // import { getProducts } from '../API';
 import axios from 'axios';
@@ -13,16 +14,14 @@ export default function Products({ searchValue, setSearchValue }) {
   const [isLoading, setIsLoading] = useState(false);
   const [toggle, setToggle] = useState(false);
 
-  const productsArr = products
+  const productsComponent = products
     .filter((item) => {
       if (item.title.toLowerCase().includes(searchValue.toLowerCase())) {
         return true;
       }
       return false;
     })
-    .map((product) => (
-      <ProductsElement key={product.id} data={product} />
-    ));
+    .map((product) => <ProductsElement key={product.id} data={product} />);
   const skeletons = [...new Array(10)].map(() => <ProductsSkeleton />);
 
   const fetchProducts = () => {
@@ -160,6 +159,23 @@ export default function Products({ searchValue, setSearchValue }) {
     }
   };
 
+  const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+  const [itemOffset, setItemOffset] = useState(0);
+
+  // const endOffset = itemOffset + itemsPerPage;
+  // console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+  // const currentItems = productsArr.slice(itemOffset, endOffset);
+  // const pageCount = Math.ceil(productsArr.length / itemsPerPage);
+
+  // // Invoke when user click to request another page.
+  // const handlePageClick = (event) => {
+  //   const newOffset = (event.selected * itemsPerPage) % productsArr.length;
+  //   console.log(
+  //     `User requested page number ${event.selected}, which is offset ${newOffset}`
+  //   );
+  //   setItemOffset(newOffset);
+  // };
+
   // fetchProducts();
   console.log('products', products);
   return (
@@ -210,11 +226,22 @@ export default function Products({ searchValue, setSearchValue }) {
               <tbody>
                 {isLoading && skeletons}
 
-                {!isLoading && products.length > 0 && productsArr}
+                {!isLoading && products.length > 0 && productsComponent}
 
                 {!isLoading && products.length < 1 && (
                   <div>Found no products yet</div>
                 )}
+
+                <ReactPaginate
+                  className="flex flex-row space-x-2"
+                  breakLabel="..."
+                  previousLabel="<"
+                  nextLabel=">"
+                  onPageChange={(e) => console.log(e)}
+                  pageRangeDisplayed={5}
+                  pageCount={3}
+                  renderOnZeroPageCount={null}
+                />
               </tbody>
             </table>
           </div>
