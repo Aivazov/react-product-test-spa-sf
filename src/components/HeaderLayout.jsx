@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Searchbox from './Searchbox';
 
-export default function HeaderLayout() {
+export default function HeaderLayout({ searchValue, setSearchValue }) {
   return (
     <div className="max-w-[960px] mx-auto my-0 px-4 py-0">
       <header className="flex items-center justify-between gap-3 py-2 mb-4 border-b border-black">
@@ -17,7 +17,10 @@ export default function HeaderLayout() {
           </Link>
         </p>
         <nav className="flex flex-row justify-center items-center">
-          <Searchbox />
+          <Searchbox
+            searchValue={searchValue}
+            setSearchValue={setSearchValue}
+          />
         </nav>
         <Link to="/add-product" className="">
           Add Product

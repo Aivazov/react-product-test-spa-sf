@@ -25,14 +25,12 @@ export default function AddProductForm() {
               />
             </label>
           </div>
-          <div>
-            <label>
-              <input
-                type="date"
-                placeholder="Date"
-                className="border border-black rounded-lg py-2 px-4 w-[215px] text-start mr-4"
-              />
-            </label>
+          <div className="w-full flex items-center justify-between">
+            <input
+              type="date"
+              placeholder="Date"
+              className="border border-black rounded-lg py-2 px-4 w-full text-start mr-4"
+            />
             <label>
               <input
                 type="number"

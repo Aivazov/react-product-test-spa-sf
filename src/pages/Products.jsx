@@ -7,11 +7,23 @@ import ProductsSkeleton from '../components/ProductsSkeleton';
 
 const URL = 'https://dummyjson.com/products?limit=10';
 
-export default function Products() {
+export default function Products({ searchValue, setSearchValue }) {
   const [products, setProducts] = useState([]);
   const [sorted, setSorted] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [toggle, setToggle] = useState(false);
+
+  const productsArr = products
+    .filter((item) => {
+      if (item.title.toLowerCase().includes(searchValue.toLowerCase())) {
+        return true;
+      }
+      return false;
+    })
+    .map((product) => (
+      <ProductsElement key={product.id} data={product} />
+    ));
+  const skeletons = [...new Array(10)].map(() => <ProductsSkeleton />);
 
   const fetchProducts = () => {
     setIsLoading(true);
@@ -196,14 +208,9 @@ export default function Products() {
                 </tr>
               </thead>
               <tbody>
-                {isLoading &&
-                  [...new Array(10)].map(() => <ProductsSkeleton />)}
+                {isLoading && skeletons}
 
-                {!isLoading &&
-                  products.length > 0 &&
-                  products.map((product) => (
-                    <ProductsElement key={product.id} data={product} />
-                  ))}
+                {!isLoading && products.length > 0 && productsArr}
 
                 {!isLoading && products.length < 1 && (
                   <div>Found no products yet</div>
