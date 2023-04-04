@@ -2,10 +2,11 @@ import { Route, Routes } from 'react-router-dom';
 import { lazy, useState } from 'react';
 import HeaderLayout from './components/HeaderLayout';
 
-import './App.css';
 import Products from './pages/Products';
 import AddProductForm from './pages/AddProductForm';
 import NotFound from './pages/NotFound';
+
+import './App.css';
 
 function App() {
   const [searchValue, setSearchValue] = useState('');
