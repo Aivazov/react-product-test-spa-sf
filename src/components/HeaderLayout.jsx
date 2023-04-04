@@ -12,12 +12,12 @@ export default function HeaderLayout({ searchValue, setSearchValue }) {
           <span role="img" aria-label="computer icon">
             💻
           </span>
-          <Link to="/" className="">
+          <Link to="/" className="no-underline">
             Products Store
           </Link>
         </p>
         <Searchbox searchValue={searchValue} setSearchValue={setSearchValue} />
-        <Link to="/add-product" className="">
+        <Link to="/add-product" className="no-underline">
           Add Product
         </Link>
       </header>

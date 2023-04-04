@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import ReactPaginate from 'react-paginate';
-// import NoImage from '../assets/images/no-image.png';
 // import { getProducts } from '../API';
 import axios from 'axios';
 import ProductsElement from '../components/ProductsElement';
@@ -43,7 +41,7 @@ export default function Products({ searchValue, setSearchValue }) {
         setTotal(res.data.total);
         console.log('total products', res.data.total);
         setProducts(res.data.products);
-        setTotalPages(total / productsPerTime);
+        setTotalPages(res.data.total / productsPerTime);
         setIsLoading(false);
         console.log('totalPages', totalPages);
         return res;
@@ -54,6 +52,7 @@ export default function Products({ searchValue, setSearchValue }) {
 
   useEffect(() => {
     fetchProducts();
+    // onPageNav();
   }, [totalPages]);
 
   const sortById = () => {
@@ -168,35 +167,17 @@ export default function Products({ searchValue, setSearchValue }) {
     return axios
       .get(`${URL}?limit=${productsPerTime}&skip=${productsPerTime * index}`)
       .then((res) => {
-        // console.log('res.data.products', res.data.products);
         setTotal(res.data.total);
-        console.log('total products', res.data.total);
         setProducts(res.data.products);
         setTotalPages(total / productsPerTime);
         setIsLoading(false);
-        console.log('totalPages', totalPages);
         return res;
       });
   };
 
-  // const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
-  // const [itemOffset, setItemOffset] = useState(0);
+  const onPageMove = (value) => {};
 
-  // const endOffset = itemOffset + itemsPerPage;
-  // console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-  // const currentItems = productsArr.slice(itemOffset, endOffset);
-  // const pageCount = Math.ceil(productsArr.length / itemsPerPage);
-
-  // // Invoke when user click to request another page.
-  // const handlePageClick = (event) => {
-  //   const newOffset = (event.selected * itemsPerPage) % productsArr.length;
-  //   console.log(
-  //     `User requested page number ${event.selected}, which is offset ${newOffset}`
-  //   );
-  //   setItemOffset(newOffset);
-  // };
-
-  // fetchProducts();
+  console.log('TotalPages', totalPages);
   return (
     <div className="container">
       <div className="row justify-content-center">
@@ -248,20 +229,16 @@ export default function Products({ searchValue, setSearchValue }) {
                 {!isLoading && products.length < 1 && (
                   <div>Found no products yet</div>
                 )}
-                {/* <ReactPaginate
-                  className="flex flex-row space-x-2"
-                  breakLabel="..."
-                  previousLabel="<"
-                  nextLabel=">"
-                  onPageChange={(e) => setSkip(skip + 10)}
-                  pageRangeDisplayed={10}
-                  pageCount={totalPages}
-                  renderOnZeroPageCount={null}
-                /> */}
 
                 {totalPages && (
                   <Pagination>
-                    <Pagination.Prev />
+                    {activePage > 0 ? (
+                      <Pagination.Prev
+                        onClick={() => onPageNav(activePage - 1)}
+                      />
+                    ) : (
+                      <Pagination.Prev disabled />
+                    )}
                     {[...new Array(totalPages)].map((_, index) => (
                       <Pagination.Item
                         key={index}
@@ -275,7 +252,13 @@ export default function Products({ searchValue, setSearchValue }) {
                     {/* {Array.from({ length: 10 }).map((_, index) => (
                     <Pagination.Item key={index}>{index + 1}</Pagination.Item>
                   ))} */}
-                    <Pagination.Next />
+                    {activePage + 1 !== totalPages ? (
+                      <Pagination.Next
+                        onClick={() => onPageNav(activePage + 1)}
+                      />
+                    ) : (
+                      <Pagination.Next disabled />
+                    )}
                   </Pagination>
                 )}
 

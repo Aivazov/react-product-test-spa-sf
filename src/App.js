@@ -3,7 +3,7 @@ import { lazy, useState } from 'react';
 import HeaderLayout from './components/HeaderLayout';
 
 import Products from './pages/Products';
-import AddProductForm from './pages/AddProductForm';
+import ProductForm from './pages/ProductForm';
 import NotFound from './pages/NotFound';
 
 import './App.css';
@@ -32,7 +32,8 @@ function App() {
             />
           }
         ></Route>
-        <Route path="add-product" element={<AddProductForm />}></Route>
+        <Route path="add-product" element={<ProductForm />}></Route>
+        {/* <Route path="add-product" element={<AddProductForm />}></Route> */}
         <Route path="*" element={<NotFound />}></Route>
       </Route>
     </Routes>
