@@ -14,11 +14,12 @@ export default function Products({ searchValue, setSearchValue }) {
   const [total, setTotal] = useState({});
   const [products, setProducts] = useState([]);
   const [sorted, setSorted] = useState([]);
-  const [totalPages, setTotalPages] = useState(0);
+  const [totalPages, setTotalPages] = useState(0); //100
   const [productsPerTime, setProductsPerTime] = useState(10);
   const [skip, setSkip] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [toggle, setToggle] = useState(false);
+  const [activePage, setActivePage] = useState(0);
 
   const productsComponent = products
     .filter((item) => {
@@ -28,22 +29,22 @@ export default function Products({ searchValue, setSearchValue }) {
       return false;
     })
     .map((product) => <ProductsElement key={product.id} data={product} />);
-  const skeletons = [...new Array(10)].map(() => <ProductsSkeleton />);
 
-  const fetchProducts = () => {
+  const skeletons = [...new Array(10)].map((_, idx) => (
+    <ProductsSkeleton key={idx} />
+  ));
+
+  const fetchProducts = async () => {
     setIsLoading(true);
-    return axios
-      .get(`${URL}?limit=${productsPerTime}&skip=${skip}`)
-      .then((res) => {
-        // console.log('res.data.products', res.data.products);
-        setTotal(res.data.total);
-        console.log('total products', res.data.total);
-        setProducts(res.data.products);
-        setTotalPages(total / productsPerTime);
-        setIsLoading(false);
-        console.log('totalPages', totalPages);
-        return res;
-      });
+    const res = await axios.get(`${URL}?limit=${productsPerTime}&skip=${skip}`);
+    // console.log('res.data.products', res.data.products);
+    setTotal(res.data.total);
+    console.log('total products', res.data.total);
+    setProducts(res.data.products);
+    setTotalPages(total / productsPerTime);
+    setIsLoading(false);
+    console.log('totalPages', totalPages);
+    return res;
   };
 
   // const removeItem = () => {};
@@ -51,6 +52,10 @@ export default function Products({ searchValue, setSearchValue }) {
   useEffect(() => {
     fetchProducts();
   }, [totalPages]);
+
+  useEffect(() => {
+    onPageNav();
+  }, [activePage]);
 
   const sortById = () => {
     setToggle(!toggle);
@@ -157,6 +162,24 @@ export default function Products({ searchValue, setSearchValue }) {
     }
   };
 
+  const onPageNav = async (index) => {
+    console.log(index);
+    setActivePage(index);
+
+    setIsLoading(true);
+    const res = await axios.get(
+      `${URL}?limit=${productsPerTime}&skip=${productsPerTime * activePage}`
+    );
+    // console.log('res.data.products', res.data.products);
+    setTotal(res.data.total);
+    console.log('total products', res.data.total);
+    setProducts(res.data.products);
+    setTotalPages(total / productsPerTime);
+    setIsLoading(false);
+    console.log('totalPages', totalPages);
+    return res;
+  };
+
   // const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
   // const [itemOffset, setItemOffset] = useState(0);
 
@@ -241,7 +264,13 @@ export default function Products({ searchValue, setSearchValue }) {
                   <Pagination>
                     <Pagination.Prev />
                     {[...new Array(totalPages)].map((_, index) => (
-                      <Pagination.Item>{index + 1}</Pagination.Item>
+                      <Pagination.Item
+                        key={index}
+                        active={index === activePage}
+                        onClick={() => onPageNav(index)}
+                      >
+                        {index + 1}
+                      </Pagination.Item>
                     ))}
 
                     {/* {Array.from({ length: 10 }).map((_, index) => (

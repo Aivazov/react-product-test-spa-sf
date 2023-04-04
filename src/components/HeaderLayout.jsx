@@ -7,8 +7,8 @@ import Searchbox from './Searchbox';
 export default function HeaderLayout({ searchValue, setSearchValue }) {
   return (
     <div className="max-w-[960px] mx-auto my-0 px-4 py-0">
-      <header className="flex items-center justify-between gap-3 py-2 mb-4 border-b border-black">
-        <p>
+      <header className="flex items-center h-[90px] justify-between py-2 mb-4 border-b border-black">
+        <p className="m-0">
           <span role="img" aria-label="computer icon">
             💻
           </span>
@@ -16,12 +16,7 @@ export default function HeaderLayout({ searchValue, setSearchValue }) {
             Products Store
           </Link>
         </p>
-        <nav className="flex flex-row justify-center items-center">
-          <Searchbox
-            searchValue={searchValue}
-            setSearchValue={setSearchValue}
-          />
-        </nav>
+        <Searchbox searchValue={searchValue} setSearchValue={setSearchValue} />
         <Link to="/add-product" className="">
           Add Product
         </Link>
