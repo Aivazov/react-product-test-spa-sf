@@ -7,12 +7,12 @@ export default function Searchbox() {
 
   return (
     <div className="flex justify-center items-center relative uppercase mx-6">
-      <HiSearch className="w-5 h-5 absolute right-[6px] top-[11px]" />
+      <HiSearch className="w-5 h-5 absolute right-[6px] top-[11px] text-gray-400" />
       <input
         value={searchValue}
         type="text"
         onChange={(e) => setSearchValue(e.target.value)}
-        className="min-w-[300px] px-2 py-2 rounded-[4px] border border-black outline-none"
+        className="min-w-[300spx] px-2 py-2 rounded-[4px] border border-black outline-none"
         placeholder="Search product by title..."
       />
     </div>

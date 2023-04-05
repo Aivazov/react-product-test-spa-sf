@@ -2,8 +2,8 @@ import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import { SignupSchema } from './SignupScema';
 import { motion } from 'framer-motion';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+// import { ToastContainer, toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
 
 export default function FormikForm() {
   return (
