@@ -5,10 +5,13 @@ import ProductsElement from '../components/ProductsElement';
 import ProductsSkeleton from '../components/ProductsSkeleton';
 import Pagination from 'react-bootstrap/Pagination';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { SearchValueContext } from '../App';
 
 const URL = 'https://dummyjson.com/products';
 
-export default function Products({ searchValue, setSearchValue }) {
+export default function Products() {
+  const { searchValue } = React.useContext(SearchValueContext);
+
   const [total, setTotal] = useState({});
   const [products, setProducts] = useState([]);
   const [sorted, setSorted] = useState([]);
@@ -37,13 +40,10 @@ export default function Products({ searchValue, setSearchValue }) {
     return axios
       .get(`${URL}?limit=${productsPerTime}&skip=${skip}`)
       .then((res) => {
-        // console.log('res.data.products', res.data.products);
         setTotal(res.data.total);
-        console.log('total products', res.data.total);
         setProducts(res.data.products);
         setTotalPages(res.data.total / productsPerTime);
         setIsLoading(false);
-        console.log('totalPages', totalPages);
         return res;
       });
   };
@@ -175,9 +175,6 @@ export default function Products({ searchValue, setSearchValue }) {
       });
   };
 
-  const onPageMove = (value) => {};
-
-  console.log('TotalPages', totalPages);
   return (
     <div className="container">
       <div className="row justify-content-center">

@@ -1,44 +1,46 @@
+import React, { lazy, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { lazy, useState } from 'react';
 import HeaderLayout from './components/HeaderLayout';
 
 import Products from './pages/Products';
 // import FormikForm from './pages/FormikForm';
-import ProductForm from './pages/ProductForm';
+import ProductForm from './pages/ProductForm/ProductForm';
 import NotFound from './pages/NotFound';
 
 import './App.css';
 
+export const SearchValueContext = React.createContext();
+
 function App() {
   const [searchValue, setSearchValue] = useState('');
-  console.log(searchValue);
 
   return (
-    <Routes>
-      <Route
-        path="/"
-        element={
-          <HeaderLayout
-            searchValue={searchValue}
-            setSearchValue={setSearchValue}
-          />
-        }
-      >
+    <SearchValueContext.Provider value={{ searchValue, setSearchValue }}>
+      <Routes>
         <Route
           path="/"
           element={
-            <Products
-              searchValue={searchValue}
-              setSearchValue={setSearchValue}
+            <HeaderLayout
+              // searchValue={searchValue}
+              // setSearchValue={setSearchValue}
             />
           }
-        ></Route>
-        {/* <Route path="add-product" element={<FormikForm />}></Route> */}
-        <Route path="add-product" element={<ProductForm />}></Route>
-        {/* <Route path="add-product" element={<AddProductForm />}></Route> */}
-        <Route path="*" element={<NotFound />}></Route>
-      </Route>
-    </Routes>
+        >
+          <Route
+            path="/"
+            element={
+              <Products
+                searchValue={searchValue}
+                setSearchValue={setSearchValue}
+              />
+            }
+          ></Route>
+          <Route path="add-product" element={<ProductForm />}></Route>
+          {/* <Route path="add-product" element={<AddProductForm />}></Route> */}
+          <Route path="*" element={<NotFound />}></Route>
+        </Route>
+      </Routes>
+    </SearchValueContext.Provider>
   );
 }
 
