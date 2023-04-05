@@ -1,6 +1,9 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
+import { motion } from 'framer-motion';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignupSchema = Yup.object().shape({
   productTitle: Yup.string()
@@ -30,20 +33,16 @@ const SignupSchema = Yup.object().shape({
     .required('Required'),
 });
 
-export default function ProductForm() {
+export default function FormikForm() {
   return (
-    <div>
-      <h1>Add product</h1>
+    <div className="form__wrap">
+      <h1>Adding of the product</h1>
 
       <Formik
         initialValues={{
           productTitle: '',
+
           author: '',
-          date: Date,
-          price: '',
-          rating: '',
-          stock: '',
-          category: '',
         }}
         validationSchema={SignupSchema}
         onSubmit={(values) => {
@@ -54,37 +53,100 @@ export default function ProductForm() {
       >
         {({ errors, touched }) => (
           <Form className="form">
-            <Field
-              name="productTitle"
-              className="input__base"
-              placeholder="Product Title"
-            />
+            <div className="inputs__wrap">
+              <div className="relative">
+                <Field
+                  name="productTitle"
+                  className="input__base"
+                  placeholder="Title"
+                />
 
-            {errors.productTitle && touched.productTitle ? (
-              <div>{errors.productTitle}</div>
-            ) : null}
+                {errors.productTitle && touched.productTitle ? (
+                  <motion.div
+                    initial={{ opacity: 0, x: -100 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="absolute top-2 right-5 text-red-600"
+                  >
+                    {errors.productTitle}
+                  </motion.div>
+                ) : null}
+              </div>
 
-            <Field name="author" className="input__base" placeholder="Author" />
+              <div className="relative">
+                <Field
+                  name="author"
+                  className="input__base"
+                  placeholder="Author"
+                />
 
-            {errors.author && touched.author ? (
-              <div>{errors.author}</div>
-            ) : null}
+                {errors.author && touched.author ? (
+                  <motion.div
+                    initial={{ opacity: 0, x: -100 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="absolute top-2 right-5 text-red-600"
+                  >
+                    {errors.author}
+                  </motion.div>
+                ) : null}
+              </div>
+            </div>
 
-            <Field name="date" className="input__base" placeholder="Date" />
+            <div className="w-full flex items-center justify-between">
+              <div>
+                <Field
+                  name="date"
+                  type="date"
+                  className="input__base w-full mr-4"
+                  placeholder="Date"
+                />
 
-            {errors.date && touched.date ? <div>{errors.date}</div> : null}
+                {errors.date && touched.date ? <div>{errors.date}</div> : null}
+              </div>
 
-            <Field name="price" className="input__base" placeholder="Price" />
+              <div>
+                <Field
+                  name="price"
+                  className="input__base"
+                  placeholder="Price"
+                />
 
-            {errors.price && touched.price ? <div>{errors.price}</div> : null}
+                {errors.price && touched.price ? (
+                  <div>{errors.price}</div>
+                ) : null}
+              </div>
+            </div>
 
-            <Field name="stock" className="input__base" placeholder="Stock" />
+            <div className="inputs__wrap">
+              <div>
+                <Field
+                  name="rating"
+                  className="input__base"
+                  placeholder="Rating"
+                />
 
-            {errors.stock && touched.stock ? <div>{errors.stock}</div> : null}
+                {errors.rating && touched.rating ? (
+                  <div>{errors.rating}</div>
+                ) : null}
+              </div>
+
+              <div>
+                <Field
+                  name="stock"
+                  className="input__base"
+                  placeholder="Stock"
+                />
+
+                {errors.stock && touched.stock ? (
+                  <div>{errors.stock}</div>
+                ) : null}
+              </div>
+            </div>
 
             <Field
               name="category"
-              className="input__base"
+              className="input__base w-full mx-0"
               placeholder="Category"
             />
 
@@ -93,8 +155,8 @@ export default function ProductForm() {
             ) : null}
 
             <button
-              type="submit"
               className="w-full bg-black rounded-lg text-white py-3 hover:bg-gray-600 transition-all ease duration-200"
+              type="submit"
             >
               Submit
             </button>

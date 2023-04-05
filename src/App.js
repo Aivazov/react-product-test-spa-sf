@@ -3,6 +3,7 @@ import { lazy, useState } from 'react';
 import HeaderLayout from './components/HeaderLayout';
 
 import Products from './pages/Products';
+// import FormikForm from './pages/FormikForm';
 import ProductForm from './pages/ProductForm';
 import NotFound from './pages/NotFound';
 
@@ -32,6 +33,7 @@ function App() {
             />
           }
         ></Route>
+        {/* <Route path="add-product" element={<FormikForm />}></Route> */}
         <Route path="add-product" element={<ProductForm />}></Route>
         {/* <Route path="add-product" element={<AddProductForm />}></Route> */}
         <Route path="*" element={<NotFound />}></Route>
