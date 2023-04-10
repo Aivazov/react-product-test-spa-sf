@@ -6,6 +6,7 @@ import Products from './pages/Products';
 // import FormikForm from './pages/FormikForm';
 import ProductForm from './pages/ProductForm/ProductForm';
 import NotFound from './pages/NotFound';
+import Counter from './components/Counter';
 
 import './App.css';
 
@@ -21,11 +22,12 @@ function App() {
           path="/"
           element={
             <HeaderLayout
-              // searchValue={searchValue}
-              // setSearchValue={setSearchValue}
+            // searchValue={searchValue}
+            // setSearchValue={setSearchValue}
             />
           }
         >
+          {/* <Route path="/" element={<Counter />} /> */}
           <Route
             path="/"
             element={
