@@ -32,8 +32,8 @@ function App() {
             path="/"
             element={
               <Products
-                searchValue={searchValue}
-                setSearchValue={setSearchValue}
+                // searchValue={searchValue}
+                // setSearchValue={setSearchValue}
               />
             }
           ></Route>

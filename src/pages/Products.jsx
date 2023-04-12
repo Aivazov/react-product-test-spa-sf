@@ -7,10 +7,19 @@ import Pagination from 'react-bootstrap/Pagination';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { SearchValueContext } from '../App';
 
+import { setTotalPages } from '../redux/paginationSlice';
+
+import { useSelector, useDispatch } from 'react-redux/es/exports';
+
 const URL = 'https://dummyjson.com/products';
 
 export default function Products() {
   const { searchValue } = React.useContext(SearchValueContext);
+
+  // const searchValue = useSelector((state) => state.filter.searchValue);
+  // const dispatch = useDispatch();
+
+  // console.log('searchValue', searchValue);
 
   const [total, setTotal] = useState({});
   const [products, setProducts] = useState([]);
