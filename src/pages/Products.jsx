@@ -7,14 +7,20 @@ import Pagination from 'react-bootstrap/Pagination';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { SearchValueContext } from '../App';
 
-import { setTotalPages } from '../redux/paginationSlice';
-
-import { useSelector, useDispatch } from 'react-redux/es/exports';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  setTotalPages,
+  incrementPage,
+  decrementPage,
+} from '../redux/paginationSlice';
 
 const URL = 'https://dummyjson.com/products';
 
 export default function Products() {
   const { searchValue } = React.useContext(SearchValueContext);
+
+  const activePage2 = useSelector((state) => state.pagination.activePage);
+  const dispatch = useDispatch();
 
   // const searchValue = useSelector((state) => state.filter.searchValue);
   // const dispatch = useDispatch();
@@ -240,6 +246,7 @@ export default function Products() {
                   <Pagination>
                     {activePage > 0 ? (
                       <Pagination.Prev
+                        // onClick={() => onPageNav(dispatch(decrementPage()))}
                         onClick={() => onPageNav(activePage - 1)}
                       />
                     ) : (

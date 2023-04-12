@@ -12,7 +12,7 @@ export default function Searchbox() {
         value={searchValue}
         type="text"
         onChange={(e) => setSearchValue(e.target.value)}
-        className="min-w-[300spx] px-2 py-2 rounded-[4px] border border-black outline-none"
+        className="min-w-[300spx] px-4 py-2 rounded-[4px] border border-black outline-none"
         placeholder="Search product by title..."
       />
     </div>
